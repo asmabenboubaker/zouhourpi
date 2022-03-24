@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Réservation Voyage index{% endblock %}
+
+{% block body %}
+
+    <h1>Réservation Voyage index</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+
+            <th>Date Réservation Voyage</th>
+            <th>Voyage</th>
+            <th>Client</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for reservation in reservations%}
+            <tr>
+
+                <td>{{ reservation.dateReservation ? reservation.dateReservation  | date('Y-m-d') : ''   }}</td>
+                <td>{{ reservation.voyage }}</td>
+                <td>{{ reservation.client }}</td>
+
+                <td>
+                    <a href="{{ path('details', {'id': reservation.id}) }}">Afficher</a>
+                    <a href="{{ path('updateR', {'id': reservation.id}) }}">Modifier</a>
+                    <a href="{{ path('deleteR', {'id': reservation.id}) }}">Supprimer</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">pas de réservations trouvées</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('Ajout') }}">Ajouter réservation</a>
+{% endblock %}

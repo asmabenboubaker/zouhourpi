@@ -1,0 +1,40 @@
+
+{% extends 'base-front.html.twig' %}
+{% block title %}Voyage index{% endblock %}
+
+{% block body %}
+
+    <h1>Voyage index</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Date Debut Voyage</th>
+            <th>Date Fin Voyage</th>
+            <th>Destination Voyage</th>
+            <th>Image</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+
+            <tr>
+
+                <td>{{ voyage.dateDebut ? voyage.dateDebut| date('Y-m-d') : ''}}</td>
+                <td>{{ voyage.dateFin ? voyage.dateFin | date('Y-m-d') : ''  }}</td>
+                <td>{{ voyage.destination }}</td>
+                <td>
+                    <img src="{{ asset('/img/'~voyage.img) }}">
+                </td>
+
+            </tr>
+
+        </tbody>
+        <td>
+            <a href="{{ path('details', {'id': voyage.id}) }}">show</a>
+            <a href="{{ path('update', {'id': voyage.id}) }}">edit</a>
+        </td>
+    </table>
+
+    <a href="{{ path('Ajouter') }}">Create new</a>
+{% endblock %}

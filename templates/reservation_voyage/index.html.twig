@@ -1,0 +1,98 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %} Réservation Voyage index{% endblock %}
+
+{% block body %}
+
+    <h1>Réservation Voyage </h1>
+
+
+
+    <a href="{{ path('Ajout') }}">Ajouter réservation</a>
+
+<ul class="nav pull-right top-menu">
+
+    <table border="0" class="display table table-bordered" id="hidden-table-info">
+        <br> <br>
+        <br> <br>
+        <br> <br>
+        <br> <br>
+        <br> <br>
+        <br> <br>
+        <br> <br>
+        <br> <br>
+        <tr>
+            <th>Date Réservation Voyage</th>
+            <th>Voyage</th>
+            <th>Client</th>
+            <td style="color:red"> Update </td>
+            <td style="color:red"> Supp</td>
+
+
+            {% for reservation in reservations%}
+        <tr>
+
+
+            <td>{{ reservation.dateReservation ? reservation.dateReservation  | date('Y-m-d') : ''   }}</td>
+            <td>{{ reservation.voyage }}</td>
+            <td>{{ reservation.client }}</td>
+
+
+
+
+            <td> <a href="{{ path('updateR', {'id': reservation.id}) }}" class="btn btn-primary btn-xs">
+                    <i class="fa fa-pencil">Modifier
+
+                    </i>
+                </a>
+            </td>
+
+            <td> <a href="{{ path('deleteR', {'id': reservation.id}) }}" class="btn btn-danger btn-xs">
+                    <i class="fa fa-trash">Supprimer
+
+                    </i>
+                </a>
+            </td>
+        </tr>
+        </tr>
+
+        {% else %}
+            <tr>
+                <td colspan="9">pas de réservations trouvées</td>
+            </tr>
+        {% endfor %}
+        <br> <br>
+        <br> <br>
+        <br> <br>
+        <br> <br>
+        <br> <br>
+        <br> <br>
+        <br> <br>
+        <br> <br>
+    </table>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <a class="btn btn-theme mt" href="{{ path('triReservationVoyage') }}" >Trier par Code reservation </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+
+            <a class="btn btn-theme mt" href="{{ path('triReservationDate') }}" >Trier par date de entree</a>
+        </div>
+    </div>
+    <a class="btn btn-success" href="{{path('PDF') }}">  PDF </a>
+
+
+
+    <form action="{{ path('find') }}">
+
+        <label>
+            ID
+        </label>
+        <input type="text" name="n">
+        <input type="submit" value="Recherche">
+
+    </form>
+
+{% endblock %}

@@ -1,0 +1,20 @@
+<h1 align="center">Liste des Reservations</h1><hr>
+<table border="10" class="display table table-bordered" id="hidden-table-info">
+
+    <tr>
+        <th>Date Réservation Voyage</th>
+        <th>Voyage</th>
+        <th>Client</th>
+
+    </tr>
+    {% for reservation in reservations %}
+        <tr>
+
+            <td>{{ reservation.dateReservation ? reservation.dateReservation  | date('Y-m-d') : ''   }}</td>
+            <td>{{ reservation.voyage }}</td>
+            <td>{{ reservation.client }}</td>
+
+        </tr>
+
+    {% endfor %}
+    </table>

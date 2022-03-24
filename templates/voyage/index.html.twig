@@ -1,0 +1,109 @@
+{% extends 'base-back.html.twig' %}
+
+{% block title %}Voyage index{% endblock %}
+
+{% block body %}
+
+    <h1>Voyage </h1>
+
+<ul class="nav pull-right top-menu">
+
+    <table border="0" class="display table table-bordered" id="hidden-table-info">
+        <br> <br>
+        <br> <br>
+        <br> <br>
+        <br> <br>
+        <br> <br>
+        <br> <br>
+        <br> <br>
+        <br> <br>
+        <tr>
+            <td style="color:red"> Date Debut Voyage </td>
+            <td style="color:red"> Date Fin Voyage </td>
+            <td style="color:red">Description</td>
+            <td style="color:red"> Destination Voyage </td>
+
+            <td style="color:red"> nbPlaces</td>
+            <td style="color:red">Image</td>
+            <td style="color:red"> Show </td>
+            <td style="color:red"> Update </td>
+            <td style="color:red"> Supp</td>
+
+
+            {% for voyage in voyages%}
+        <tr>
+
+            <td>{{ voyage.dateDebut ? voyage.dateDebut| date('Y-m-d') : ''}}</td>
+            <td>{{ voyage.dateFin ? voyage.dateFin | date('Y-m-d') : ''  }}</td>
+            <td>{{ voyage.description }}</td>
+            <td>{{ voyage.destination }}</td>
+            <td>{{ voyage.nbPlaces }}</td>
+            <td><img class="image-display" src="{{ asset('/img/'~voyage.img) }}"></td>
+
+            <td> <a href="{{ path('details', {'id': voyage.id}) }}" class="btn btn-danger btn-xs">
+                    <i class="fa fa-trash">Show
+
+                    </i>
+                </a>
+            </td>
+
+            <td> <a href="{{ path('update', {'id': voyage.id}) }}" class="btn btn-primary btn-xs">
+                    <i class="fa fa-pencil">Modifier
+
+                    </i>
+                </a>
+            </td>
+
+            <td> <a href="{{ path('delete', {'id': voyage.id}) }}" class="btn btn-danger btn-xs">
+                    <i class="fa fa-trash">Supprimer
+
+                    </i>
+                </a>
+            </td>
+
+        </tr>
+        </tr>
+
+
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        <br> <br>
+        <br> <br>
+        <br> <br>
+        <br> <br>
+        <br> <br>
+        <br> <br>
+        <br> <br>
+        <br> <br>
+    </table>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+            <a class="btn btn-theme mt" href="{{ path('triNbrPlacesVoyage') }}" >Trier par Code reservation </a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+
+            <a class="btn btn-theme mt" href="{{ path('triVoyageDate') }}" >Trier par date de entree</a>
+        </div>
+    </div>
+    <a class="btn btn-success" href="{{path('PDFVoyage') }}">  PDF </a>
+
+    <a href="{{ path('Ajouter') }}">Create new</a>
+
+    <form action="{{ path('find') }}">
+
+        <label>
+            ID
+        </label>
+        <input type="text" name="n">
+        <input type="submit" value="Recherche">
+
+    </form>
+    <ul class="nav pull-right top-menu">
+        <li><a class="logout" href="{{ path('voyageStat') }}">Statistiques</a></li>
+    </ul>
+    {% endblock %}
